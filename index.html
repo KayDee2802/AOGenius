@@ -56,7 +56,12 @@
             --df-messenger-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             --df-messenger-width: 950px;
             --df-messenger-height: 1050px;
-            --df-messenger-text-align: left;
+            }
+
+/* Aligns chat messages to the left */
+df-messenger::part(message) {
+    text-align: left !important;
+}
         }
     </style>
     <!-- Firebase SDK -->
