@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AOGenius</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+            text-align: center;
+            display: none; /* Hide content until authentication */
+        }
+        .header {
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #003366;
+            color: white;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #003366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .chatbot-button:hover {
+            transform: scale(1.1);
+        }
+        df-messenger {
+            --df-messenger-bot-message: #c8e1e9;
+            --df-messenger-button-titlebar-color: #003366;
+            --df-messenger-chat-background: #ffffff;
+            --df-messenger-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --df-messenger-width: 450px;
+            --df-messenger-height: 600px;
+        }
+    </style>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAatobwv6nJQVN-FMuxDZeGVRGakGdVqUg",
+            authDomain: "aogenius-d32dd.firebaseapp.com",
+            projectId: "aogenius-d32dd",
+            storageBucket: "aogenius-d32dd.firebasestorage.app",
+            messagingSenderId: "552770245654",
+            appId: "1:552770245654:web:ed9db21fc36067d0d95137",
+            measurementId: "G-B7CK09JYP3"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        function login() {
+            let email = prompt("Enter your email:");
+            let password = prompt("Enter your password:");
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Access Granted!");
+                    document.body.style.display = "block";
+                })
+                .catch((error) => {
+                    alert("Access Denied! Invalid credentials.");
+                    window.location.href = "https://www.lufthansa.com";
+                });
+        }
+
+        window.onload = login;
+    </script>
+</head>
+<body>
+    <div class="header">AOGenius</div>
+    <div class="container">
+        <p>AOGenius is your intelligent assistant, built to support AOG desk officers with all aspects of internal processes and AOG operations. From troubleshooting internal workflows to clarifying complex procedures, AOGenius provides quick, accurate answers to keep operations running smoothly. Always on standby, it’s like having an expert colleague at your fingertips, helping you navigate the fast-paced world of AOG with ease and confidence.</p>
+    </div>
+    
+    <div class="chatbot-button" onclick="toggleChatbot()">💬 Chat with AOGenius</div>
+    
+    <df-messenger
+        intent="WELCOME"
+        chat-title="AOGenius"
+        agent-id="0d2b61ab-7812-41cc-9278-6ff15ccd8eb1"
+        language-code="en"
+        style="display: none;">
+    </df-messenger>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <script>
+        function toggleChatbot() {
+            const bot = document.querySelector("df-messenger");
+            bot.style.display = bot.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>
